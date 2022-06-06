@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Todos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body onload="datetime_update()">
+    <div class="flexbox-class">
+        <h1 id="day_datetime"></h1>
+        <div class="date">
+            <p id="month"></p>
+            <p>&nbsp;</p>
+            <p id="date"></p>
+            <p>,</p>
+            <p>&nbsp;</p>
+            <p id="year"></p>
+        </div>
+        <div class="iptext_wrapper">
+        <input type="text" name="todo_iptext" class="iptext" id="iptext">
+        <img onclick="add_todo()" src="https://cdn.pixabay.com/photo/2017/01/10/23/01/icon-1970474_1280.png" width="16" height="16" class="img_ip">
+        </div>
+        <ul>
+            {% for i in range(todos|length) %}
+            <li>{{todos[i].id}}) {{todos[i].descr}}<input type="radio" class="radio_custom" onclick="let id = {{todos[i].id}}; send_urlargs(id);" {% if todos[i].is_ticked %}checked{% else %}{% endif %}><img src="https://freesvg.org/img/milker_X_icon.png" height="16" width="16" onclick="let del_id={{todos[i].id}};del_todos(del_id);"></li>
+            {% endfor %}
+        </ul>
+    </div>
+        <script>
+     function datetime_update() {
+            const date = new Date();
+            const days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+            const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+            let day = date.getDay()
+            let month = date.getMonth()
+            document.getElementById('day_datetime').innerText = days[day];
+            document.getElementById('month').innerText = months[month];
+            document.getElementById('date').innerText = date.getDate().toString();
+            document.getElementById('year').innerText = date.getFullYear().toString()
+        }
+
+        function add_todo() {
+            let ip_text = document.getElementById('iptext').value;
+            if (ip_text == null) {
+                void(0);
+            }
+            else {
+                const xhttp = new XMLHttpRequest();
+                xhttp.onload = function update_page() {
+                   location.reload();
+                }
+                xhttp.open('GET', 'listener?t='+ip_text, true);
+                xhttp.send();
+            }
+
+        }
+        function send_urlargs(id) {
+         const xhttp = new XMLHttpRequest();
+         xhttp.onload = function refresh_page() {
+             location.reload();
+         }
+         xhttp.open('GET', 'listener?ch='+id, true);
+         xhttp.send();
+        }
+
+        function del_todos(del_id) {
+         const xhttp = new XMLHttpRequest();
+         xhttp.onload = function refresh_page() {
+             location.reload();
+         }
+         xhttp.open('GET', 'listener?del='+del_id, true);
+         xhttp.send();
+        }
+
+</script>
+</body>
+</html>

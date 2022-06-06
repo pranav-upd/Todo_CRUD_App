@@ -1,0 +1,56 @@
+body{
+ background-color: #24c991;
+}
+
+.flexbox-class{
+ display: flex;
+ border-radius: 12px;
+ margin-top: 12.5%;
+ margin-left: 35%;
+ height: 25em;
+ width: 22.5em;
+ background-color: #fefefe;
+ flex-direction: column;
+ overflow: auto;
+}
+
+h1{
+ font-family: "Comic Sans MS";
+ text-align: center;
+ color: #101010;
+;
+}
+
+.date{
+ display: inline-flex;
+ color: #7d7d7d;
+ margin-left: 40%;
+ margin-top: -10.5%;
+ font-family: "ui-sans-serif";
+ font-size: small;
+}
+
+li{
+ font-family: "Comic Sans MS";
+}
+
+.radio_custom{
+ accent-color: #19d703;
+}
+
+.iptext{
+ text-align: center;
+ border-radius: 12px;
+ font-family: "Comic Sans MS";
+ width: 70%;
+ margin-left: 12%;
+}
+
+.iptext_wrapper{
+ display: inline-flex;
+}
+
+.img_ip{
+ margin-top: 1%;
+ margin-left: 1%;
+}
